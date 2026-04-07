@@ -55,7 +55,12 @@ class Calculator(tk.Tk):
         self.bind("<BackSpace>", lambda event: self.backspace())
         self.bind("<Escape>", lambda event: self.clear())
 
-    
+    def _on_key(self, event, allowed_keys):
+        key = event.char
+        if key in allowed_keys:
+            self._append(key)
+        elif key == "\r":
+            self.calculate()
 
     def _append(self, value):
         if self.expression == "0" and value not in ".+-*/()":
